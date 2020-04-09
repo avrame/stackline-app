@@ -1,6 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { LineChart, Line, XAxis } from 'recharts';
+import TableHeader from './TableHeader';
+import { SORT_ASC, SORT_DESC } from '../../constants';
 import './sales.css';
+
+const DEFAULT_SORT_DIR = SORT_DESC;
 
 const usdFormat = new Intl.NumberFormat('en-US', {
 	style: 'currency',
@@ -28,9 +32,26 @@ export default function({ sales }) {
 	const graphWrapper = useRef(null);
 	const initGraphWidth = getGraphWrapperWidth(graphWrapper);
 	const [ graphWidth, setGraphWidth ] = useState(initGraphWidth);
+	const [ sortProp, setSortProp ] = useState('weekEnding');
+	const [ sortDir, setSortDir ] = useState(DEFAULT_SORT_DIR);
 
 	function handleWindowResize() {
 		setGraphWidth(getGraphWrapperWidth(graphWrapper));
+	}
+
+	function sortColumn(prop) {
+		// If the prop that is clicked is already sorted, toggle the direction
+		// Otherwise, set it to the default sort direction
+		if (prop === sortProp) {
+			if (sortDir === SORT_ASC) {
+				setSortDir(SORT_DESC);
+			} else {
+				setSortDir(SORT_ASC);
+			}
+		} else {
+			setSortDir(DEFAULT_SORT_DIR);
+		}
+		setSortProp(prop);
 	}
 
 	useEffect(() => {
@@ -39,6 +60,25 @@ export default function({ sales }) {
 			window.removeEventListener('resize', handleWindowResize);
 		};
 	}, []);
+
+	// Sort the sales
+	const sortedSales = sales.sort((a, b) => {
+		if (sortProp === 'weekEnding') {
+			const diff = new Date(b.weekEnding) - new Date(a.weekEnding);
+			if (sortDir === SORT_ASC) {
+				return diff;
+			} else {
+				return -diff;
+			}
+		} else {
+			const diff = b[sortProp] - a[sortProp];
+			if (sortDir === SORT_ASC) {
+				return diff;
+			} else {
+				return -diff;
+			}
+		}
+	});
 
 	return (
 		<div className="sales page">
@@ -61,15 +101,45 @@ export default function({ sales }) {
 				<table className="sales-table">
 					<thead>
 						<tr>
-							<th>Week Ending</th>
-							<th>Retail Sales</th>
-							<th>Wholesale Sales</th>
-							<th>Units Sold</th>
-							<th>Retailer Margin</th>
+							<TableHeader
+								title="Week Ending"
+								prop="weekEnding"
+								sortProp={sortProp}
+								sortColumn={sortColumn}
+								sortDir={sortDir}
+							/>
+							<TableHeader
+								title="Retail Sales"
+								prop="retailSales"
+								sortProp={sortProp}
+								sortColumn={sortColumn}
+								sortDir={sortDir}
+							/>
+							<TableHeader
+								title="Wholesale Sales"
+								prop="wholesaleSales"
+								sortProp={sortProp}
+								sortColumn={sortColumn}
+								sortDir={sortDir}
+							/>
+							<TableHeader
+								title="Units Sold"
+								prop="unitsSold"
+								sortProp={sortProp}
+								sortColumn={sortColumn}
+								sortDir={sortDir}
+							/>
+							<TableHeader
+								title="Retailer Margin"
+								prop="retailerMargin"
+								sortProp={sortProp}
+								sortColumn={sortColumn}
+								sortDir={sortDir}
+							/>
 						</tr>
 					</thead>
 					<tbody>
-						{sales.map((row, idx) => {
+						{sortedSales.map((row, idx) => {
 							return (
 								<tr key={idx}>
 									<td>{usDateTimeFormat.format(new Date(row.weekEnding))}</td>

@@ -8,6 +8,10 @@
 	font-size: 14px;
 	text-transform: uppercase;
 	padding: 0.25rem 0 1rem;
+	cursor: pointer;
+}
+.sales-table th svg {
+	vertical-align: middle;
 }
 .sales-table td {
 	color: #999;
