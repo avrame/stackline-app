@@ -2,12 +2,13 @@ import React from 'react';
 
 export default function() {
 	return (
-		<div className="sales-page">
-			<div>
+		<div className="sales page">
+			<div className="section padded">
 				<h2>Retail Sales</h2>
 				<p>Graph goes here</p>
 			</div>
-			<div>
+
+			<div className="section padded">
 				<table>
 					<thead>
 						<tr>

@@ -10,3 +10,16 @@ body {
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+.section {
+	margin: 1rem;
+	background-color: #fff;
+}
+.section h2 {
+	font-size: 20px;
+	font-weight: 400;
+}
+
+.padded {
+	padding: 1rem 1.5rem;
+}

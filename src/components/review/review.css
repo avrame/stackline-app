@@ -1,0 +1,13 @@
+.review h1 {
+	font-size: 18px;
+	font-weight: 500;
+}
+.review h1 b {
+	font-weight: 700;
+}
+.review h2 {
+	font-size: 16px;
+}
+.review p {
+	font-size: 14px;
+}
