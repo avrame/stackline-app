@@ -8,13 +8,26 @@ header {
 
 .wrapper {
 	display: flex;
+	justify-content: space-evenly;
+	flex-direction: column;
+}
+@media screen and (min-width: 720px) {
+	.wrapper {
+		flex-direction: row;
+	}
 }
 
 .side {
-	min-width: 280px;
-	max-width: 380px;
-	margin-right: 0;
-	flex-grow: 1;
+	width: 100%;
+}
+@media screen and (min-width: 720px) {
+	.side {
+		width: auto;
+		min-width: 240px;
+		max-width: 380px;
+		margin-right: 0;
+		flex: 25% 1 auto;
+	}
 }
 
 .product-info img {
@@ -36,6 +49,7 @@ header {
 
 .tags {
 	border: 1px solid #eee;
+	border-width: 1px 0;
 }
 
 .side nav a {
@@ -59,6 +73,14 @@ header {
 }
 
 .page {
-	max-width: 800px;
-	flex-grow: 3;
+	width: 100%;
+}
+
+@media screen and (min-width: 720px) {
+	.page {
+		width: auto;
+		/* width: calc(75% - 3rem); */
+		flex: 75% 1 0;
+		/* max-width: 800px; */
+	}
 }

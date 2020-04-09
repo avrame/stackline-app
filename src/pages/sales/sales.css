@@ -14,3 +14,9 @@
 	border-top: 1px solid #eee;
 	padding: 1rem 0;
 }
+
+.svg-text {
+	text-transform: uppercase;
+	font-weight: 400;
+	fill: #999;
+}

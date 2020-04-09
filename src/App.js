@@ -11,7 +11,7 @@ import './App.css';
 const PRODUCT_ID = 'B007TIE0GQ';
 
 function App({ products, setProducts }) {
-	const [ page, setPage ] = useState(SALES_PAGE);
+	const [ page, setPage ] = useState(OVERVIEW_PAGE);
 
 	const product = products.find((prod) => prod.id === PRODUCT_ID) || {};
 
@@ -48,7 +48,6 @@ function App({ products, setProducts }) {
 			</header>
 			<div className="wrapper">
 				<Side image={image} title={title} subtitle={subtitle} tags={tags} page={page} setPage={setPage} />
-
 				{pageComponent}
 			</div>
 		</div>
