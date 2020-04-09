@@ -3,20 +3,19 @@ import { connect } from 'react-redux';
 import { setProducts } from './store/actions/actionCreators';
 import Overview from './pages/overview/Overview';
 import Sales from './pages/sales/Sales';
-import Tag from './components/tag/Tag';
+import Side from './components/side/Side';
+import { OVERVIEW_PAGE, SALES_PAGE } from './pages/pageNames';
 import { getProducts } from './api.js';
 import './App.css';
-
-const OVERVIEW_PAGE = 'OVERVIEW_PAGE';
-const SALES_PAGE = 'SALES_PAGE';
 
 const PRODUCT_ID = 'B007TIE0GQ';
 
 function App({ products, setProducts }) {
-	const [ page, setPage ] = useState(OVERVIEW_PAGE);
+	const [ page, setPage ] = useState(SALES_PAGE);
 
 	const product = products.find((prod) => prod.id === PRODUCT_ID) || {};
-	const { image, title, subtitle, tags = [] } = product;
+
+	const { image, title, subtitle, tags = [], sales = [] } = product;
 
 	useEffect(
 		() => {
@@ -36,7 +35,7 @@ function App({ products, setProducts }) {
 			pageComponent = <Overview product={product} />;
 			break;
 		case SALES_PAGE:
-			pageComponent = <Sales product={product} />;
+			pageComponent = <Sales sales={sales} />;
 			break;
 		default:
 			pageComponent = <Overview product={product} />;
@@ -48,24 +47,7 @@ function App({ products, setProducts }) {
 				<img className="logo" src="logo-white.svg" alt="Stackline Logo" />
 			</header>
 			<div className="wrapper">
-				<div className="side section">
-					<div className="product-info padded">
-						<img src={image} alt={title} width="200" />
-						<h2>{title}</h2>
-						<h3>{subtitle}</h3>
-					</div>
-
-					<div className="tags padded">{tags.map((tag) => <Tag tag={tag} />)}</div>
-
-					<nav className="padded">
-						<a href="#overview" onClick={() => setPage(OVERVIEW_PAGE)}>
-							Overview
-						</a>
-						<a href="#sales" onClick={() => setPage(SALES_PAGE)}>
-							Sales
-						</a>
-					</nav>
-				</div>
+				<Side image={image} title={title} subtitle={subtitle} tags={tags} page={page} setPage={setPage} />
 
 				{pageComponent}
 			</div>

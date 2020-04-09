@@ -13,7 +13,7 @@ export default function({ product }) {
 
 			<div className="reviews section padded">
 				<h2>Reviews</h2>
-				{reviews.map((rev) => <Review data={rev} />)}
+				{reviews.map((rev, idx) => <Review key={idx} data={rev} />)}
 			</div>
 		</div>
 	);

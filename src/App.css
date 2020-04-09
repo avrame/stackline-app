@@ -45,8 +45,20 @@ header {
 	text-transform: uppercase;
 	color: #999;
 	text-decoration: none;
+	padding: 1rem .25rem;
+}
+.side nav a svg {
+	vertical-align: middle;
+	margin-right: .5rem;
+}
+.side nav a.on {
+	color: #000;
+}
+.side nav a.on svg {
+	color: #259ff9;
 }
 
 .page {
 	max-width: 800px;
+	flex-grow: 3;
 }
