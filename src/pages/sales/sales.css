@@ -2,7 +2,7 @@
 	width: 100%;
 }
 .sales-table th {
-	color: #333;
+	color: var(--gray-dark);
 	text-align: left;
 	font-weight: 400;
 	font-size: 14px;
@@ -14,7 +14,7 @@
 	vertical-align: middle;
 }
 .sales-table td {
-	color: #999;
+	color: var(--gray-medium);
 	border-top: 1px solid #eee;
 	padding: 1rem 0;
 }
@@ -22,5 +22,5 @@
 .svg-text {
 	text-transform: uppercase;
 	font-weight: 400;
-	fill: #999;
+	fill: var(--gray-medium);
 }
